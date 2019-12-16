@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Square from './Components/Square';
+import Board from './Conatiners/Board';
 
 function App() {
   return (
-    <Square />
+    <Board />
   );
 }
 
