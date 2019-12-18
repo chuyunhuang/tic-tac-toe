@@ -31,9 +31,13 @@ export default function Board() {
     )
   }
 
+  //show status, who's turn
+  let status;
+  status = `Next Player is: ${xIsNext ? 'X' : 'O'} `
+
   return (
     <div>
-      <div className="status"></div>
+      <div className="status">{status}</div>
       <div className="board-row">
         {renderSquares(0)}
         {renderSquares(1)}
@@ -52,4 +56,20 @@ export default function Board() {
     </div>
   )
 
+  //Calculating the winner
+  function calculateWinner(squares) {
+    //determine sets of winning lines
+    const winninglines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ]
+
+  }
+  return null;
 }
