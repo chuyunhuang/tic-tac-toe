@@ -13,7 +13,7 @@ export default function Board() {
     // create a copy of the board
     const squares = [...boardSquares]
     // if the index of the board is filled, return
-    if (squares[index]) return;
+    if (calculateWinner(boardSquares) || squares[index]) return;
     // add 'X' or 'O'
     squares[index] = xIsNext ? 'X' : 'O'
     // calculate the next turn
@@ -32,16 +32,17 @@ export default function Board() {
   }
 
   //show status, who's turn
+  const winner = calculateWinner(boardSquares)
   let status;
-  status = `Next Player is: ${xIsNext ? 'X' : 'O'} `
+  status = winner ? `Winnier is ${winner}` : `Next Player is: ${xIsNext ? 'X' : 'O'} `
 
   return (
-    <div>
+    <div className="board-wrapper">
       <div className="status">{status}</div>
       <div className="board-row">
         {renderSquares(0)}
         {renderSquares(1)}
-        {renderSquares(3)}
+        {renderSquares(2)}
       </div>
       <div className="board-row">
         {renderSquares(3)}
@@ -59,7 +60,7 @@ export default function Board() {
   //Calculating the winner
   function calculateWinner(squares) {
     //determine sets of winning lines
-    const winninglines = [
+    const winningLines = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -69,7 +70,19 @@ export default function Board() {
       [0, 4, 8],
       [2, 4, 6]
     ]
-
+    // loop through this set
+    for (let i = 0; i < winningLines.length; i++) {
+      // check to see if the values in our arr fulfills the winningLines
+      const [a, b, c] = winningLines[i]
+      if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
+        // if so, return x or o
+        return squares[a]
+      }
+    }
+    // else, return nothing
+    return null;
   }
-  return null;
+
+
 }
+
